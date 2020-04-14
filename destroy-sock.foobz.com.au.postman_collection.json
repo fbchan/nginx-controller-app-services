@@ -1,0 +1,175 @@
+{
+	"info": {
+		"_postman_id": "646fe4ae-c277-4231-9a72-ed9380facc68",
+		"name": "NGINX Controller - destroy-sock.foobz.com.au",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "01 - Login to Controller - t2-admin@f5.com",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "468aaff1-55d0-42d6-8304-d4b0290fa00c",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"credentials\": {\r\n\t\t\"type\": \"BASIC\",\r\n\t\t\"username\": \"{{USER}}\",\r\n\t\t\"password\": \"{{PASSWORD}}\"\r\n\t}\r\n}"
+				},
+				"url": {
+					"raw": "https://{{host}}/api/v1/platform/login",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"platform",
+						"login"
+					]
+				},
+				"description": "Returns a cookie / authentication token\n"
+			},
+			"response": []
+		},
+		{
+			"name": "02 - DELETE Component - sock web component",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {}
+				},
+				"url": {
+					"raw": "https://{{host}}/api/v1/services/environments/t2-production/apps/sock.foobz.com.au/components/sock.foobz.com.au",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"services",
+						"environments",
+						"t2-production",
+						"apps",
+						"sock.foobz.com.au",
+						"components",
+						"sock.foobz.com.au"
+					]
+				},
+				"description": "Defining a Gateway.  Associate an instance, configure ingress on this Gateway to a specific URI"
+			},
+			"response": []
+		},
+		{
+			"name": "03 - DELETE App - sock.foobz.com.au",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3dca0dba-290b-46b0-bc08-f5e0425cb99e",
+						"exec": [
+							"var time = setTimeout(function(){}, [480]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {}
+				},
+				"url": {
+					"raw": "https://{{host}}/api/v1/services/environments/t2-production/apps/sock.foobz.com.au",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"services",
+						"environments",
+						"t2-production",
+						"apps",
+						"sock.foobz.com.au"
+					]
+				},
+				"description": "Defining a Gateway.  Associate an instance, configure ingress on this Gateway to a specific URI"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3476b91d-c228-4864-bd53-ea84a2fc1d01",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "9661caff-cc8e-4279-af25-426b87de6a99",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "13b48836-3c79-4269-9d57-556c91265d0a",
+			"key": "host",
+			"value": "nginx-ctrl.foobz.com.au",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
