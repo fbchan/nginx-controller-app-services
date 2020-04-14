@@ -56,13 +56,13 @@
 					"type": "basic",
 					"basic": [
 						{
-							"key": "password",
-							"value": "fbchan123",
+							"key": "username",
+							"value": "{{ USER }}",
 							"type": "string"
 						},
 						{
-							"key": "username",
-							"value": "t2-admin@f5.com",
+							"key": "password",
+							"value": "{{ PASSWORD}}",
 							"type": "string"
 						},
 						{
@@ -122,12 +122,12 @@
 					"basic": [
 						{
 							"key": "password",
-							"value": "fbchan123",
+							"value": "{{ PASSWORD }}",
 							"type": "string"
 						},
 						{
 							"key": "username",
-							"value": "t2-admin@f5.com",
+							"value": "{{ USER }}",
 							"type": "string"
 						},
 						{
@@ -201,7 +201,7 @@
 	],
 	"variable": [
 		{
-			"id": "3e4e2442-7d71-4e44-8fb2-15f099c409fa",
+			"id": "f9a84b0e-128c-426f-bf97-66bd6a20146f",
 			"key": "host",
 			"value": "nginx-ctrl.foobz.com.au",
 			"type": "string"
