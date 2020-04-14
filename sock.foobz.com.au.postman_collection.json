@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "18b5ee7a-feb6-4c0e-89b4-66990738ef69",
+		"name": "NGINX Controller - sock.foobz.com.au",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "01 - Login to Controller - t2-admin@f5.com",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "468aaff1-55d0-42d6-8304-d4b0290fa00c",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"credentials\": {\r\n\t\t\"type\": \"BASIC\",\r\n\t\t\"username\": \"{{USER}}\",\r\n\t\t\"password\": \"{{PASSWORD}}\"\r\n\t}\r\n}"
+				},
+				"url": {
+					"raw": "https://{{host}}/api/v1/platform/login",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"platform",
+						"login"
+					]
+				},
+				"description": "Returns a cookie / authentication token\n"
+			},
+			"response": []
+		},
+		{
+			"name": "02 - Create App - sock.foobz.com.au",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"metadata\": {\n        \"name\": \"sock.foobz.com.au\",\n        \"displayName\": \"Sock Shop\",\n        \"description\": \"Sock shop by Jenkins Pipeline\"\n    }\n}",
+					"options": {}
+				},
+				"url": {
+					"raw": "https://{{host}}/api/v1/services/environments/t2-production/apps/sock.foobz.com.au",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"services",
+						"environments",
+						"t2-production",
+						"apps",
+						"sock.foobz.com.au"
+					]
+				},
+				"description": "Defining a Gateway.  Associate an instance, configure ingress on this Gateway to a specific URI"
+			},
+			"response": []
+		},
+		{
+			"name": "03 - Create Component - sock web component",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"metadata\": {\n    \"name\": \"sock.foobz.com.au\",\n    \"displayName\": \"Sock Shop\",\n    \"tags\": []\n  },\n  \"desiredState\": {\n    \"ingress\": {\n      \"gatewayRefs\": [\n        {\n          \"ref\": \"/services/environments/t2-production/gateways/tenant2-nginx-plus-inst1\"\n        },\n        {\n          \"ref\": \"/services/environments/t2-production/gateways/tenant2-nginx-plus-inst2\"\n        }\n      ],\n      \"uris\": {\n        \"https://sock.foobz.com.au\": {}\n      },\n      \"tls\": {\n        \"certRef\": {\n          \"ref\": \"/services/environments/t2-production/certs/foobz.com.au\"\n        },\n        \"protocols\": [\n          \"TLSv1.3\",\n          \"TLSv1.2\"\n        ],\n        \"preferServerCipher\": \"DISABLED\",\n        \"sessionCache\": \"OFF\"\n      }\n    },\n    \"backend\": {\n      \"workloadGroups\": {\n        \"sockshop-backend-server\": {\n          \"loadBalancingMethod\": {\n            \"type\": \"ROUND_ROBIN\"\n          },\n          \"uris\": {\n            \"http://10.6.0.17\": {\n              \"isBackup\": false,\n              \"isDown\": false,\n              \"isDrain\": false,\n              \"resolve\": \"DISABLED\"\n            }\n          }\n        }\n      },\n      \"monitoring\": {\n        \"defaultState\": \"HEALTHY\",\n        \"uri\": \"/\"\n      }\n    },\n    \"logging\": {\n      \"errorLog\": \"ENABLED\",\n      \"accessLog\": {\n        \"state\": \"ENABLED\"\n      }\n    }\n  }\n}",
+					"options": {}
+				},
+				"url": {
+					"raw": "https://{{host}}/api/v1/services/environments/t2-production/apps/sock.foobz.com.au/components/sock.foobz.com.au",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"services",
+						"environments",
+						"t2-production",
+						"apps",
+						"sock.foobz.com.au",
+						"components",
+						"sock.foobz.com.au"
+					]
+				},
+				"description": "Defining a Gateway.  Associate an instance, configure ingress on this Gateway to a specific URI"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3476b91d-c228-4864-bd53-ea84a2fc1d01",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "9661caff-cc8e-4279-af25-426b87de6a99",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "20c89a0f-a33a-4c67-afae-8055fc5bd559",
+			"key": "host",
+			"value": "nginx-ctrl.foobz.com.au",
+			"type": "string"
+		},
+		{
+			"id": "31533f34-0991-4c0d-bac0-b96abbc05322",
+			"key": "USER",
+			"value": "t2-admin@f5.com",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "e4cf31c4-239a-4bc9-af66-b4bfe90d62b3",
+			"key": "PASSWORD",
+			"value": "fbchan123",
+			"type": "string",
+			"disabled": true
+		}
+	],
+	"protocolProfileBehavior": {}
+}
