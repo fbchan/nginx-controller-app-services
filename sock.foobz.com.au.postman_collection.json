@@ -153,10 +153,24 @@
 	],
 	"variable": [
 		{
-			"id": "6ef6db98-c699-4e8e-af15-a907eb416b88",
+			"id": "75d16a03-7089-46ec-b46b-3cdc5e07b17b",
 			"key": "host",
 			"value": "nginx-ctrl.foobz.com.au",
 			"type": "string"
+		},
+		{
+			"id": "16ccbdfc-a903-4525-8511-fbfcafd82122",
+			"key": "USER",
+			"value": "t2-admin@f5.com",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "ad7c5e58-1c13-4a0a-af81-7ac8720c35a9",
+			"key": "PASSWORD",
+			"value": "fbchan123",
+			"type": "string",
+			"disabled": true
 		}
 	],
 	"protocolProfileBehavior": {}
