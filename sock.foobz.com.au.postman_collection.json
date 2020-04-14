@@ -52,30 +52,6 @@
 		{
 			"name": "02 - Create App - sock.foobz.com.au",
 			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "username",
-							"value": "{{ USER }}",
-							"type": "string"
-						},
-						{
-							"key": "password",
-							"value": "{{ PASSWORD}}",
-							"type": "string"
-						},
-						{
-							"key": "saveHelperData",
-							"type": "any"
-						},
-						{
-							"key": "showPassword",
-							"value": false,
-							"type": "boolean"
-						}
-					]
-				},
 				"method": "PUT",
 				"header": [
 					{
@@ -117,30 +93,6 @@
 		{
 			"name": "03 - Create Component - sock web component",
 			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "{{ PASSWORD }}",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "{{ USER }}",
-							"type": "string"
-						},
-						{
-							"key": "saveHelperData",
-							"type": "any"
-						},
-						{
-							"key": "showPassword",
-							"value": false,
-							"type": "boolean"
-						}
-					]
-				},
 				"method": "PUT",
 				"header": [
 					{
@@ -201,7 +153,7 @@
 	],
 	"variable": [
 		{
-			"id": "f9a84b0e-128c-426f-bf97-66bd6a20146f",
+			"id": "6ef6db98-c699-4e8e-af15-a907eb416b88",
 			"key": "host",
 			"value": "nginx-ctrl.foobz.com.au",
 			"type": "string"
