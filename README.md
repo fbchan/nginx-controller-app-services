@@ -1,1 +1,1 @@
-# nginx-controller-app-services
+# NGINX Controller Example declaration
