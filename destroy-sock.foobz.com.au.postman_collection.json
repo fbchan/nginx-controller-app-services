@@ -95,7 +95,7 @@
 					"script": {
 						"id": "3dca0dba-290b-46b0-bc08-f5e0425cb99e",
 						"exec": [
-							"var time = setTimeout(function(){}, [4000]);"
+							"var time = setTimeout(function(){}, [6000]);"
 						],
 						"type": "text/javascript"
 					}
