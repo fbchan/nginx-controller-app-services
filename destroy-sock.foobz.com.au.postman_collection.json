@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "01 - Login to Controller - t2-admin@f5.com",
+			"name": "01 - Login to Controller",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -50,7 +50,7 @@
 			"response": []
 		},
 		{
-			"name": "02 - DELETE Component - sock web component",
+			"name": "02 - DELETE Component - sock.foobz.com.au",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -95,7 +95,7 @@
 					"script": {
 						"id": "3dca0dba-290b-46b0-bc08-f5e0425cb99e",
 						"exec": [
-							"var time = setTimeout(function(){}, [480]);"
+							"var time = setTimeout(function(){}, [4000]);"
 						],
 						"type": "text/javascript"
 					}
@@ -111,8 +111,8 @@
 					},
 					{
 						"key": "",
-						"value": "",
-						"type": "text"
+						"type": "text",
+						"value": ""
 					}
 				],
 				"body": {
@@ -165,7 +165,7 @@
 	],
 	"variable": [
 		{
-			"id": "13b48836-3c79-4269-9d57-556c91265d0a",
+			"id": "1bc12dae-7081-46ec-a183-6f2b2ab1d9ee",
 			"key": "host",
 			"value": "nginx-ctrl.foobz.com.au",
 			"type": "string"
