@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "a3b00854-be83-4a02-819c-97d3b1d8cdef",
+		"name": "NGINX Controller - Deploy Apps",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "01 - Login to Controller",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "468aaff1-55d0-42d6-8304-d4b0290fa00c",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"credentials\": {\r\n\t\t\"type\": \"BASIC\",\r\n\t\t\"username\": \"{{USER}}\",\r\n\t\t\"password\": \"{{PASSWORD}}\"\r\n\t}\r\n}"
+				},
+				"url": {
+					"raw": "https://{{HOST}}/api/v1/platform/login",
+					"protocol": "https",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"platform",
+						"login"
+					]
+				},
+				"description": "Returns a cookie / authentication token\n"
+			},
+			"response": []
+		},
+		{
+			"name": "02 - Create App",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "",
+						"type": "text",
+						"value": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"metadata\": {\n        \"name\": \"{{FQDN}}\",\n        \"displayName\": \"{{DISPLAY_NAME}}\",\n        \"description\": \"{{DISPLAY_NAME}} by Jenkins Pipeline\"\n    }\n}",
+					"options": {}
+				},
+				"url": {
+					"raw": "https://{{HOST}}/api/v1/services/environments/{{ENV}}/apps",
+					"protocol": "https",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"services",
+						"environments",
+						"{{ENV}}",
+						"apps"
+					]
+				},
+				"description": "Defining a Gateway.  Associate an instance, configure ingress on this Gateway to a specific URI"
+			},
+			"response": []
+		},
+		{
+			"name": "03 - Create Component",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"metadata\": {\n    \"name\": \"{{FQDN}}\",\n    \"displayName\": \"{{DISPLAY_NAME}} component\",\n    \"tags\": []\n  },\n  \"desiredState\": {\n    \"ingress\": {\n      \"gatewayRefs\": [\n        {\n          \"ref\": \"/services/environments/{{ENV}}/gateways/{{INST1}}\"\n        },\n        {\n          \"ref\": \"/services/environments/{{ENV}}/gateways/{{INST2}}\"\n        }\n      ],\n      \"uris\": {\n        \"https://{{FQDN}}\": {}\n      },\n      \"tls\": {\n        \"certRef\": {\n          \"ref\": \"/services/environments/{{ENV}}/certs/foobz.com.au\"\n        },\n        \"protocols\": [\n          \"TLSv1.3\",\n          \"TLSv1.2\"\n        ],\n        \"preferServerCipher\": \"DISABLED\",\n        \"sessionCache\": \"OFF\"\n      }\n    },\n    \"backend\": {\n      \"workloadGroups\": {\n        \"backend-server1\": {\n          \"loadBalancingMethod\": {\n            \"type\": \"ROUND_ROBIN\"\n          },\n          \"uris\": {\n            \"{{BACKEND_01}}\": {\n              \"isBackup\": false,\n              \"isDown\": false,\n              \"isDrain\": false,\n              \"resolve\": \"DISABLED\"\n            }\n          }\n        }\n      },\n      \"monitoring\": {\n        \"defaultState\": \"HEALTHY\",\n        \"uri\": \"/\"\n      }\n    },\n    \"logging\": {\n      \"errorLog\": \"ENABLED\",\n      \"accessLog\": {\n        \"state\": \"ENABLED\"\n      }\n    }\n  }\n}",
+					"options": {}
+				},
+				"url": {
+					"raw": "https://{{HOST}}/api/v1/services/environments/{{ENV}}/apps/{{APP}}/components/{{FQDN}}",
+					"protocol": "https",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"services",
+						"environments",
+						"{{ENV}}",
+						"apps",
+						"{{APP}}",
+						"components",
+						"{{FQDN}}"
+					]
+				},
+				"description": "Defining a Gateway.  Associate an instance, configure ingress on this Gateway to a specific URI"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3476b91d-c228-4864-bd53-ea84a2fc1d01",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "9661caff-cc8e-4279-af25-426b87de6a99",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
