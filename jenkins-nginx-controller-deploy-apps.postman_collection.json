@@ -91,6 +91,18 @@
 		},
 		{
 			"name": "03 - Create Component",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "9e9e56bd-4912-4375-877d-b0ab71f2a847",
+						"exec": [
+							"var time = setTimeout(function(){}, [5000]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [
